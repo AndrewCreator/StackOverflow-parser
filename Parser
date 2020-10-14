@@ -1,0 +1,12 @@
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://stackoverflow.com/questions"
+
+res = requests.get(url)
+soup = BeautifulSoup(res.text, "html.parser")
+questions = soup.select(".summary")
+
+for que in questions:
+    q = que.select_one('.question-hyperlink').getText()
+    print("\n" +q)
